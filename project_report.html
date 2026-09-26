@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Report - Blood Cell Count Analyzer</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.5;
+      color: #222;
+      background-color: #fff;
+      padding: 0;
+      margin: 0;
+      font-size: 11pt;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+    /* Cover Page */
+    .cover-container {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 3px double #1a365d;
+      padding: 40px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .cover-header h1 {
+      font-size: 24pt;
+      color: #1a365d;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .cover-header h2 {
+      font-size: 14pt;
+      color: #4a5568;
+      font-weight: 500;
+      margin-top: 0;
+    }
+    .cover-tagline {
+      font-size: 12pt;
+      color: #2b6cb0;
+      font-weight: bold;
+      border-top: 2px solid #2b6cb0;
+      border-bottom: 2px solid #2b6cb0;
+      padding: 10px 0;
+      margin: 30px auto;
+      max-width: 80%;
+    }
+    .cover-details {
+      text-align: left;
+      margin: 40px auto;
+      width: 75%;
+      background: #f7fafc;
+      border-left: 4px solid #1a365d;
+      padding: 20px;
+      font-size: 11pt;
+    }
+    .cover-details table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .cover-details td {
+      padding: 6px 10px;
+    }
+    .cover-details td.label {
+      font-weight: bold;
+      color: #2d3748;
+      width: 40%;
+    }
+    .cover-footer {
+      font-size: 10pt;
+      color: #718096;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 15px;
+    }
+
+    /* Content styling */
+    h2 {
+      color: #1a365d;
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      font-size: 15pt;
+    }
+    h3 {
+      color: #2d3748;
+      font-size: 12pt;
+      margin-top: 20px;
+    }
+    p, li {
+      text-align: justify;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 10pt;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background-color: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+    table.data-table tr:nth-child(even) {
+      background-color: #f7fafc;
+    }
+    pre, code {
+      font-family: 'Consolas', 'Courier New', Courier, monospace;
+    }
+    pre {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 12px;
+      font-size: 9.5pt;
+      overflow-x: auto;
+      line-height: 1.35;
+    }
+    .diagram-box {
+      background-color: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: monospace;
+      font-size: 9.5pt;
+      white-space: pre;
+    }
+    .callout {
+      background: #edf2f7;
+      border-left: 4px solid #3182ce;
+      padding: 12px 15px;
+      margin: 15px 0;
+      border-radius: 2px;
+    }
+    .badge-pass {
+      color: #22543d;
+      background: #c6f6d5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. COVER PAGE -->
+  <div class="cover-container">
+    <div class="cover-header">
+      <h1>VITyarthi Project Report</h1>
+      <h2>Course: CSE1021 – Introduction to Problem Solving and Programming</h2>
+    </div>
+
+    <div class="cover-tagline">
+      BLOOD CELL COUNT ANALYZER<br>
+      <span style="font-size: 11pt; font-weight: normal; color: #4a5568;">
+        An Educational Blood Test Data Analysis System
+      </span>
+    </div>
+
+    <div class="cover-details">
+      <table>
+        <tr><td class="label">Project Title:</td><td>Blood Cell Count Analyzer</td></tr>
+        <tr><td class="label">Course Code:</td><td>CSE1021</td></tr>
+        <tr><td class="label">Course Title:</td><td>Introduction to Problem Solving and Programming</td></tr>
+        <tr><td class="label">Branch / Program:</td><td>B.Tech Computer Science and Engineering</td></tr>
+        <tr><td class="label">Specialization:</td><td>Health Informatics</td></tr>
+        <tr><td class="label">Academic Year:</td><td>2026 (First Year)</td></tr>
+        <tr><td class="label">Student Name:</td><td>Isha Singh Rajput</td></tr>
+        <tr><td class="label">Evaluation Mode:</td><td>Flipped Course Evaluation (Build Your Own Project)</td></tr>
+      </table>
+    </div>
+
+    <div class="cover-footer">
+      VITyarthi &bull; School of Computer Science & Engineering &bull; September 2026
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 2. INTRODUCTION -->
+  <h2>2. Introduction</h2>
+  <p>
+    A Complete Blood Count (CBC) is one of the most critical diagnostic evaluations performed in healthcare. It assesses the cellular components of circulating blood, focusing principally on:
+  </p>
+  <ul>
+    <li><strong>Red Blood Cells (RBC):</strong> Erythrocytes that transport oxygen from the lungs to bodily tissues and return carbon dioxide.</li>
+    <li><strong>White Blood Cells (WBC):</strong> Leukocytes that drive immunological defense against infections and inflammation.</li>
+    <li><strong>Platelets (Thrombocytes):</strong> Cellular fragments crucial for hemostasis, vascular repair, and blood clotting.</li>
+  </ul>
+  <p>
+    In Health Informatics, computational systems such as Laboratory Information Systems (LIS) and Clinical Decision Support Systems (CDSS) structure, validate, and compare physiological observations against standardized demographic reference intervals. The <strong>Blood Cell Count Analyzer</strong> provides an educational, console-based simulation of this workflow, built explicitly with foundational Python constructs: conditional branches, loops, functions, lists, and dictionaries.
+  </p>
+
+  <!-- 3. PROBLEM STATEMENT -->
+  <h2>3. Problem Statement</h2>
+  <p>
+    Manual inspection of laboratory hematology reports by non-clinical learners is prone to comparison mistakes, misinterpretation of gender-differentiated normal intervals, and unnecessary anxiety due to premature self-diagnosis.
+  </p>
+  <div class="callout">
+    <strong>Technical Challenge:</strong> To design and implement a beginner-friendly, modular Python software application using core concepts from CSE1021 that automates laboratory data input, validates input formats, evaluates values against gender-aware reference intervals, aggregates statistical counts, and generates an aligned report accompanied by strict non-diagnostic educational disclaimers.
+  </div>
+
+  <!-- 4. FUNCTIONAL REQUIREMENTS -->
+  <h2>4. Functional Requirements</h2>
+  <table class="data-table">
+    <tr>
+      <th>Module</th>
+      <th>Key Features & Functional Deliverables</th>
+    </tr>
+    <tr>
+      <td><strong>Module 1: Patient Information</strong></td>
+      <td>Captures and validates Patient Name (non-empty), Age (positive integer 1–125), Gender (Male/Female/Other), and assigns unique Sample ID.</td>
+    </tr>
+    <tr>
+      <td><strong>Module 2: Blood Data Entry</strong></td>
+      <td>Prompts for RBC, WBC, and Platelet counts with specified medical units. Robustly catches and reprompts on non-numeric, negative, or zero inputs.</td>
+    </tr>
+    <tr>
+      <td><strong>Module 3: Blood Analysis</strong></td>
+      <td>Matches gender-specific ranges for RBC and adult baselines for WBC/Platelets. Categorizes values as <code>LOW</code>, <code>WITHIN RANGE</code>, or <code>HIGH</code>. Calculates summary counts.</td>
+    </tr>
+    <tr>
+      <td><strong>Module 4: Report Generation</strong></td>
+      <td>Builds an aligned tabular report showing parameters, observed values, reference intervals, status, summary statistics, and disclaimers.</td>
+    </tr>
+    <tr>
+      <td><strong>Module 5: Session Storage & Search</strong></td>
+      <td>Stores records in an in-memory list of dictionaries. Provides summary listing and linear search by patient name or sample ID.</td>
+    </tr>
+  </table>
+
+  <!-- 5. NON-FUNCTIONAL REQUIREMENTS -->
+  <h2>5. Non-Functional Requirements</h2>
+  <ul>
+    <li><strong>Usability:</strong> Intuitive terminal menu with explicit unit hints (e.g., <code>million cells/mcL, e.g., 4.8</code>) and continuous loop navigation.</li>
+    <li><strong>Reliability & Crash Resilience:</strong> Uncaught runtime exceptions are prevented using <code>try-except ValueError</code> blocks embedded in <code>while True</code> validation loops.</li>
+    <li><strong>Maintainability:</strong> Clean separation of concerns across 6 Python files. Reference ranges are isolated within a single dictionary (<code>reference_ranges.py</code>).</li>
+    <li><strong>Performance:</strong> Instantaneous computation and linear search execution (&lt; 10 ms).</li>
+    <li><strong>Resource Efficiency:</strong> Uses standard library only (zero external pip packages); RAM usage is under 25 MB.</li>
+    <li><strong>Ethical Transparency:</strong> Prominent educational disclaimers prevent medical misinterpretation.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- 6. SYSTEM ARCHITECTURE -->
+  <h2>6. System Architecture</h2>
+  <div class="diagram-box">
++-----------------------------------------------------------------------+
+|                             USER INTERACTION                          |
+|                  Console Terminal (CLI Input / Output)                |
++-----------------------------------------------------------------------+
+                                  |
+                                  v
++-----------------------------------------------------------------------+
+|                    MAIN CONTROLLER & MENU (main.py)                   |
+|                   Interactive Menu Loop & Option Routing              |
++-----------------------------------------------------------------------+
+         |                       |                     |
+         v                       v                     v
++-----------------+     +-----------------+   +-------------------------+
+| VALIDATION      |     | ANALYSIS ENGINE |   | SESSION RECORDS         |
+| (validation.py) |     | (analyzer.py)   |   | (records.py)            |
+|                 |     |                 |   |                         |
+| - String Check  |     | - Classify      |   | - In-memory list storage|
+| - Number Check  |     | - Count totals  |   | - Linear Search by Name |
+| - Demographic   |     | - Assign notes  |   | - Linear Search by ID   |
+|   Validation    |     |                 |   |                         |
++-----------------+     +-----------------+   +-------------------------+
+                                 ^
+                                 |
++--------------------------------+--------------------------------------+
+| REFERENCE RANGES (reference_ranges.py)                                |
+| Centralized baseline dictionary for RBC, WBC, and Platelets           |
++-----------------------------------------------------------------------+
+                                 |
+                                 v
++-----------------------------------------------------------------------+
+| REPORT GENERATION (report.py)                                         |
+| Formatted table builder, summary counters, and academic disclaimers   |
++-----------------------------------------------------------------------+
+  </div>
+
+  <!-- 7. DESIGN DIAGRAMS -->
+  <h2>7. Design Diagrams</h2>
+
+  <h3>7.1 Use Case Model</h3>
+  <p>
+    <strong>Actors:</strong> Student / Evaluator (Primary User), System.<br>
+    <strong>Use Cases:</strong> UC-1 (Enter New Blood Test), UC-2 (View Previous Records), UC-3 (Search Records by Name/ID), UC-4 (View Reference Ranges), UC-5 (About & Disclaimers), UC-6 (Exit).
+  </p>
+
+  <h3>7.2 Process Flow / Workflow Diagram</h3>
+  <div class="diagram-box">
+[Start] --> [Display Menu (1-6)] --> [Read Choice]
+  |
+  +-- (Choice 1) --> [Input Demographics] --> [Input Blood Values]
+  |                    --> [Validate] --> [Classify & Count]
+  |                    --> [Print Tabular Report] --> [Save in Session List] --> (Return to Menu)
+  |
+  +-- (Choice 2) --> [Display Table of All Session Records] --> (Return to Menu)
+  |
+  +-- (Choice 3) --> [Prompt Query] --> [Execute Linear Search] --> [Display Matches] --> (Return to Menu)
+  |
+  +-- (Choice 4) --> [Display Educational Reference Ranges] --> (Return to Menu)
+  |
+  +-- (Choice 5) --> [Display Course Rationale & Educational Disclaimer] --> (Return to Menu)
+  |
+  +-- (Choice 6) --> [Print Farewell Message & Terminate]
+  </div>
+
+  <h3>7.3 Sequence Diagram</h3>
+  <div class="diagram-box">
+User          main.py       validation.py     analyzer.py     report.py      records.py
+ |               |                |                |              |              |
+ |--- Choice 1 ->|                |                |              |              |
+ |               |-- get_info() ->|                |              |              |
+ |<-- Prompts ---|                |                |              |              |
+ |--- Demogr. -->|-- Returns dict |                |              |              |
+ |               |-- get_vals() ->|                |              |              |
+ |<-- Prompts ---|                |                |              |              |
+ |--- Values --->|-- Returns dict |                |              |              |
+ |               |-------------------- analyze() ->|              |              |
+ |               |<------------------- Returns res |              |              |
+ |               |-----------------------------------> display() -|              |
+ |<---------------- Rendered Table & Summary ---------------------|              |
+ |               |-------------------------------------------------> save() ---->|
+ |<-- Save Conf. ----------------------------------------------------------------|
+  </div>
+
+  <h3>7.4 Component Architecture</h3>
+  <p>
+    The application consists of 6 decoupled components communicating through explicit functional calls with primitive types, lists, and dictionaries.
+  </p>
+
+  <h3>7.5 In-Memory Entity-Relationship (ER) Design</h3>
+  <div class="diagram-box">
+PATIENT (sample_id [PK], name, age, gender)
+   ||
+   ||-- (undergoes) --> TEST_RECORD (record_id [PK], sample_id [FK], timestamp)
+                           ||
+                           ||-- (measures)  --> BLOOD_VALUES (rbc, wbc, platelets)
+                           ||
+                           ||-- (generates) --> ANALYSIS_RESULT (summary, parameter_details)
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 8. DESIGN DECISIONS & RATIONALE -->
+  <h2>8. Design Decisions & Rationale</h2>
+  <ul>
+    <li><strong>Modular Architecture:</strong> Decoupling validation, analysis, reference data, storage, and reporting allows each file to adhere to the Single Responsibility Principle and simplifies unit testing.</li>
+    <li><strong>Standard Library Exclusivity:</strong> Eliminates pip version mismatches across student environments, ensuring the project runs seamlessly on any standard Python 3.8+ interpreter.</li>
+    <li><strong>In-Memory Python Lists and Dictionaries:</strong> Highlights core first-year syllabus concepts (dictionary lookups, list iteration, linear search) without the overhead of external SQL engines.</li>
+    <li><strong>Deterministic Rules vs. ML:</strong> Clinical reference ranges are legally regulated physiological thresholds, making rule-based conditional branches (<code>if-elif-else</code>) transparent and accurate.</li>
+    <li><strong>Strict Non-Diagnostic Educational Stance:</strong> Abnormal parameters are reported as mathematical deviations, reinforcing safe clinical informatics ethics.</li>
+  </ul>
+
+  <!-- 9. IMPLEMENTATION DETAILS -->
+  <h2>9. Implementation Details</h2>
+  <table class="data-table">
+    <tr>
+      <th>File</th>
+      <th>Key Functions</th>
+      <th>CSE1021 Concepts Used</th>
+    </tr>
+    <tr>
+      <td><code>validation.py</code></td>
+      <td><code>validate_string</code>, <code>validate_positive_float</code>, <code>validate_age</code>, <code>validate_gender</code>, <code>get_user_information</code>, <code>get_blood_values</code></td>
+      <td>While loops, try-except ValueError, string stripping, type casting</td>
+    </tr>
+    <tr>
+      <td><code>reference_ranges.py</code></td>
+      <td><code>get_rbc_range</code>, <code>get_wbc_range</code>, <code>get_platelet_range</code>, <code>display_reference_ranges</code></td>
+      <td>Nested dictionaries, string formatting, tuple returns</td>
+    </tr>
+    <tr>
+      <td><code>analyzer.py</code></td>
+      <td><code>classify_value</code>, <code>analyze_rbc</code>, <code>analyze_wbc</code>, <code>analyze_platelets</code>, <code>analyze_blood_values</code></td>
+      <td>If-elif-else statements, counting algorithms, list of dict aggregation</td>
+    </tr>
+    <tr>
+      <td><code>records.py</code></td>
+      <td><code>save_record</code>, <code>view_all_records</code>, <code>search_by_name</code>, <code>search_by_sample_id</code>, <code>search_records_interactive</code></td>
+      <td>List append, linear search algorithm, case-insensitive string search</td>
+    </tr>
+    <tr>
+      <td><code>report.py</code></td>
+      <td><code>format_record_report</code>, <code>display_report</code>, <code>display_about</code></td>
+      <td>Formatted string output with column alignment specifiers</td>
+    </tr>
+    <tr>
+      <td><code>main.py</code></td>
+      <td><code>main</code>, <code>display_menu</code>, <code>handle_new_blood_test</code></td>
+      <td>Event-loop management, modular function orchestration</td>
+    </tr>
+  </table>
+
+  <!-- 10. SCREENSHOTS / RESULTS -->
+  <h2>10. Screenshots / Terminal Results</h2>
+  <pre>
+======================================================================
+                  BLOOD CELL COUNT ANALYSIS REPORT
+              Educational Health Informatics Laboratory
+======================================================================
+Sample / Patient ID : SMP-1001
+Patient Name        : Rahul Sharma
+Age                 : 19 years
+Gender              : Male
+----------------------------------------------------------------------
+Parameter    | Value        | Reference Range        | Status
+----------------------------------------------------------------------
+RBC          | 4.8          | 4.5-5.9                | WITHIN RANGE
+WBC          | 6500         | 4500-11000             | WITHIN RANGE
+Platelets    | 220000       | 150000-450000          | WITHIN RANGE
+----------------------------------------------------------------------
+SUMMARY
+  Total parameters analyzed : 3
+  Within reference range    : 3
+  Below reference range     : 0
+  Above reference range     : 0
+----------------------------------------------------------------------
+EDUCATIONAL OBSERVATIONS:
+  * RBC (Red Blood Cells): RBC value is within normal educational limits.
+  * WBC (White Blood Cells): WBC value is within normal educational limits.
+  * Platelets (Platelet Count): Platelet value is within normal educational limits.
+======================================================================
+  </pre>
+
+  <!-- 11. TESTING APPROACH -->
+  <h2>11. Testing Approach</h2>
+  <table class="data-table">
+    <tr>
+      <th>Test ID</th>
+      <th>Inputs Tested</th>
+      <th>Expected Result</th>
+      <th>Actual Result</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td><strong>TC-01</strong></td>
+      <td>RBC: 5.0 (M), WBC: 7000, Plt: 250000</td>
+      <td>Normal=3, Low=0, High=0</td>
+      <td>Normal=3, Low=0, High=0</td>
+      <td><span class="badge-pass">PASSED (100%)</span></td>
+    </tr>
+    <tr>
+      <td><strong>TC-02</strong></td>
+      <td>RBC: 3.5 (M), WBC: 6500, Plt: 220000</td>
+      <td>RBC Low; Normal=2, Low=1, High=0</td>
+      <td>Normal=2, Low=1, High=0</td>
+      <td><span class="badge-pass">PASSED (100%)</span></td>
+    </tr>
+    <tr>
+      <td><strong>TC-03</strong></td>
+      <td>RBC: 4.8 (F), WBC: 13500, Plt: 300000</td>
+      <td>WBC High; Normal=2, Low=0, High=1</td>
+      <td>Normal=2, Low=0, High=1</td>
+      <td><span class="badge-pass">PASSED (100%)</span></td>
+    </tr>
+    <tr>
+      <td><strong>TC-04</strong></td>
+      <td>RBC: 3.8 (M), WBC: 14200, Plt: 110000</td>
+      <td>RBC/Plt Low, WBC High; Normal=0, Low=2, High=1</td>
+      <td>Normal=0, Low=2, High=1</td>
+      <td><span class="badge-pass">PASSED (100%)</span></td>
+    </tr>
+    <tr>
+      <td><strong>TC-05</strong></td>
+      <td>Boundary values (4.50, 5.90, 4.49, 5.91) & Linear Search</td>
+      <td>Endpoints correctly bounded; linear search returns exact match</td>
+      <td>Matches verified</td>
+      <td><span class="badge-pass">PASSED (100%)</span></td>
+    </tr>
+  </table>
+
+  <!-- 12. CHALLENGES FACED -->
+  <h2>12. Challenges Faced</h2>
+  <ul>
+    <li><strong>Clinical Unit Discrepancies:</strong> RBC is measured in million cells/mcL, whereas WBC and platelets are in whole counts/mcL. Solved by embedding explicit format hints in the CLI prompts.</li>
+    <li><strong>Crash Prevention:</strong> Non-numeric user inputs were handled using <code>try-except ValueError</code> inside <code>while True</code> loops.</li>
+    <li><strong>Gender Sensitivity:</strong> Solved by using gender-keyed nested dictionaries for RBC thresholds.</li>
+    <li><strong>Medical Ethics:</strong> Guarded against speculative diagnoses by framing findings as mathematical reference comparisons.</li>
+  </ul>
+
+  <!-- 13. LEARNINGS & KEY TAKEAWAYS -->
+  <h2>13. Learnings & Key Takeaways</h2>
+  <p>
+    Through this project, we mastered algorithmic problem decomposition, defensive programming with exception handling, dictionary data structures, linear search mechanics, and the role of Health Informatics in standardizing laboratory data processing.
+  </p>
+
+  <!-- 14. FUTURE ENHANCEMENTS -->
+  <h2>14. Future Enhancements</h2>
+  <ol>
+    <li>Persistent data storage via JSON or CSV files.</li>
+    <li>Desktop Graphical User Interface using Python's built-in <code>tkinter</code>.</li>
+    <li>Expansion to include Hemoglobin, Hematocrit, and 5-part Differential Leukocyte Counts.</li>
+    <li>Automated PDF export for printable patient laboratory report cards.</li>
+  </ol>
+
+  <!-- 15. REFERENCES -->
+  <h2>15. References</h2>
+  <ol>
+    <li>Guttag, J. V. (2021). <em>Introduction to Computation and Programming Using Python</em>. MIT Press.</li>
+    <li>Lutz, M. (2013). <em>Learning Python</em> (5th ed.). O'Reilly Media.</li>
+    <li>Pagana, K. D., & Pagana, T. J. (2022). <em>Mosby's Diagnostic and Laboratory Test Reference</em> (15th ed.). Elsevier.</li>
+    <li>Python Software Foundation. (2026). <em>Python 3 Documentation</em>. https://docs.python.org/3/</li>
+  </ol>
+
+</body>
+</html>

@@ -341,3 +341,142 @@ records_list = [
     }
 ]
 ```
+
+---
+
+## 7. Sequence Diagram (UML)
+
+The following sequence diagram illustrates the step-by-step control flow and message passing for analyzing a new blood test (Option 1):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Student / User
+    participant Main as main.py (Controller)
+    participant Val as validation.py
+    participant Ana as analyzer.py
+    participant Ref as reference_ranges.py
+    participant Rep as report.py
+    participant Rec as records.py
+
+    User->>Main: Select "1. Enter New Blood Test"
+    Main->>Val: get_user_information(sample_counter)
+    Val-->>User: Prompt for Name, Age, Gender, ID
+    User-->>Val: Provide inputs
+    Val->>Val: Validate (types, positivity, non-empty)
+    Val-->>Main: Return patient_info dict
+
+    Main->>Val: get_blood_values()
+    Val-->>User: Prompt for RBC, WBC, Platelets
+    User-->>Val: Enter numeric values
+    Val->>Val: Validate (positive floats, try-except)
+    Val-->>Main: Return blood_values dict
+
+    Main->>Ana: analyze_blood_values(blood_values, gender)
+    Ana->>Ref: get_rbc_range(gender), get_wbc_range(), get_platelet_range()
+    Ref-->>Ana: Return threshold tuples (min, max)
+    Ana->>Ana: classify_value() for each parameter
+    Ana->>Ana: Count within_range, low, high
+    Ana-->>Main: Return analysis_result dict
+
+    Main->>Rep: display_report(record)
+    Rep-->>User: Render formatted report with summary & disclaimer
+
+    Main->>Rec: save_record(record, session_records)
+    Rec->>Rec: Append record to list
+    Rec-->>User: Display confirmation message
+    Main-->>User: Return to Main Menu
+```
+
+---
+
+## 8. Component Diagram (UML)
+
+```mermaid
+graph TD
+    subgraph User Interface Layer
+        CLI["Command Line Interface (CLI)"]
+    end
+
+    subgraph Controller Layer
+        MAIN["main.py<br/>(Menu Coordinator & Event Loop)"]
+    end
+
+    subgraph Processing & Logic Layer
+        VAL["validation.py<br/>(Input Sanitization & Type Checking)"]
+        ANA["analyzer.py<br/>(Classification & Counter Engine)"]
+    end
+
+    subgraph Knowledge & Configuration Layer
+        REF["reference_ranges.py<br/>(Baseline Thresholds & Disclaimers)"]
+    end
+
+    subgraph Presentation Layer
+        REP["report.py<br/>(Tabular Formatting & Disclaimers)"]
+    end
+
+    subgraph Storage Layer
+        REC["records.py<br/>(In-Memory Session Store & Linear Search)"]
+    end
+
+    CLI --> MAIN
+    MAIN --> VAL
+    MAIN --> ANA
+    MAIN --> REP
+    MAIN --> REC
+    ANA --> REF
+    REP --> REF
+    REC --> REP
+```
+
+---
+
+## 9. Entity-Relationship (ER) & Storage Design
+
+Even though the system employs lightweight in-memory Python structures rather than a heavy SQL database (in compliance with the CSE1021 course level), the data model strictly mirrors a relational entity schema:
+
+```mermaid
+erDiagram
+    PATIENT ||--o{ TEST_RECORD : undergoes
+    TEST_RECORD ||--|| BLOOD_VALUES : measures
+    TEST_RECORD ||--|| ANALYSIS_RESULT : generates
+    ANALYSIS_RESULT ||--|{ PARAMETER_STATUS : evaluates
+    ANALYSIS_RESULT ||--|| SUMMARY_COUNT : summarizes
+
+    PATIENT {
+        string sample_id PK "Unique Sample/Patient ID"
+        string name "Patient Full Name"
+        int age "Age in Years (1-125)"
+        string gender "Male, Female, or Other"
+    }
+
+    TEST_RECORD {
+        string record_id PK "Session Index / ID"
+        string sample_id FK "References PATIENT"
+        timestamp recorded_at "Session Entry Timestamp"
+    }
+
+    BLOOD_VALUES {
+        float rbc "Red Blood Cells (million/mcL)"
+        float wbc "White Blood Cells (cells/mcL)"
+        float platelets "Platelet Count (cells/mcL)"
+    }
+
+    PARAMETER_STATUS {
+        string parameter PK "RBC, WBC, Platelets"
+        float value "Measured Value"
+        string unit "Measurement Unit"
+        float min_ref "Minimum Reference"
+        float max_ref "Maximum Reference"
+        string status "LOW | WITHIN RANGE | HIGH"
+        string educational_note "Non-diagnostic observation"
+    }
+
+    SUMMARY_COUNT {
+        int total_parameters "Total tested (3)"
+        int within_range "Count normal"
+        int low "Count below range"
+        int high "Count above range"
+    }
+```
+
