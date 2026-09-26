@@ -1,0 +1,5 @@
+# Blood Cell Count Analyzer
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Python Standard Library only.
+# No third-party pip dependencies are required.
+# Compatible with Python 3.8+ (including Python 3.10, 3.11, 3.12, 3.14+).
