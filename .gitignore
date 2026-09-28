@@ -14,3 +14,6 @@ venv/
 .idea/
 *.swp
 *.swo
+
+# Nested repository clone
+blood-cell-count-analyzer/

@@ -141,8 +141,8 @@ Blood_Cell_Count_Analyzer/
    ```
 2. **Clone or Download the Project**:
    ```bash
-   git clone https://github.com/your-username/Blood_Cell_Count_Analyzer.git
-   cd Blood_Cell_Count_Analyzer
+   git clone https://github.com/ishasinghrajput25/blood-cell-count-analyzer.git
+   cd blood-cell-count-analyzer
    ```
 3. **No External Packages Required**:
    Since the application utilizes only Python built-in features, no `pip install` steps are required.
