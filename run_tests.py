@@ -1,11 +1,11 @@
+# run_tests.py
 # Automated verification test script for Blood Cell Count Analyzer
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-TEST SUITE
-==========
-This script automatically executes the 5 fundamental test cases required by the project
-specifications to ensure classification accuracy, count correctness, and error resilience.
+Runs automated test cases to check value classifications, boundary cutoffs,
+summary counters, and linear search without having to re-type in the terminal.
 """
 
 from analyzer import analyze_blood_values, classify_value

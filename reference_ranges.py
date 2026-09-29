@@ -1,18 +1,11 @@
-# Reference ranges and constants for educational blood cell count analysis
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# reference_ranges.py
+# Reference ranges and educational disclaimer
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-REFERENCE RANGES MODULE
-=======================
-This module defines the educational baseline reference ranges for standard
-blood cell counts (RBC, WBC, and Platelets).
-
-IMPORTANT DISCLAIMER:
-These ranges are intended strictly for educational and classroom demonstration
-purposes in CSE1021 (Introduction to Problem Solving and Programming).
-Actual clinical laboratory reference ranges vary based on the analyzing
-laboratory, instrumentation, patient age, physiological conditions, and sex.
-This application does NOT provide medical diagnosis or clinical advice.
+Central dictionary of reference ranges for RBC, WBC, and Platelets,
+along with range retrieval functions and disclaimer text.
 """
 
 # Predefined educational reference ranges stored in a nested Python dictionary

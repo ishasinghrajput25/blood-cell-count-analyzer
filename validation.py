@@ -1,16 +1,12 @@
-# Input collection and validation module
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# validation.py
+# Input collection and error handling
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-VALIDATION MODULE
-=================
-This module handles all user input operations and robust input validation.
-It ensures that:
-1. Names and strings are non-empty.
-2. Age is a valid positive integer.
-3. Gender is chosen from predefined choices.
-4. Blood parameters (RBC, WBC, Platelets) are positive numeric values.
-5. The application does not crash due to invalid user typing.
+This file handles getting input from the user and making sure it is valid.
+It checks for non-empty text, valid ages, gender selection, and positive numbers
+for blood counts so that typing mistakes don't crash the program.
 """
 
 def validate_string(prompt, min_len=1):
@@ -88,9 +84,7 @@ def validate_gender():
 
 def get_user_information(sample_counter=1):
     """
-    MODULE 1: Collects and validates patient/user demographic information.
-    Includes optional sample ID.
-    Returns a dictionary of patient details.
+    Prompts for patient demographics (name, age, gender) and returns them in a dict.
     """
     print("\n" + "=" * 50)
     print("          MODULE 1: PATIENT INFORMATION")
@@ -117,8 +111,7 @@ def get_user_information(sample_counter=1):
 
 def get_blood_values():
     """
-    MODULE 2: Collects and validates laboratory blood cell values.
-    Returns a dictionary of RBC, WBC, and Platelet measurements.
+    Asks the user for RBC, WBC, and Platelet numbers, validates them, and returns a dict.
     """
     print("\n" + "=" * 50)
     print("        MODULE 2: BLOOD TEST DATA ENTRY")

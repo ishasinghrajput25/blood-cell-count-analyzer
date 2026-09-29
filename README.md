@@ -1,223 +1,131 @@
 # Blood Cell Count Analyzer
-### An Educational Blood Test Data Analysis System
-
-> **Course:** CSE1021 – Introduction to Problem Solving and Programming  
-> **Degree Program:** B.Tech Computer Science and Engineering (Specialization in Health Informatics)  
-> **Semester:** First Year
+An Educational Blood Test Data Analysis Tool  
+**Course:** CSE1021 – Introduction to Problem Solving and Programming  
+**Author:** Isha Singh Rajput (First-Year B.Tech CSE – Health Informatics)
 
 ---
 
-## 1. Project Title
-**Blood Cell Count Analyzer: An Educational Blood Test Data Analysis System**
+## About The Project
+
+As a first-year student specializing in Health Informatics, I wanted to build my course project around actual healthcare data rather than solving textbook math problems. In real-world medicine, almost everyone has had a Complete Blood Count (CBC) test done at some point. When patients receive their printed lab sheet, it usually looks like an intimidating grid of decimals, unfamiliar units, and reference numbers. Unless you have medical training, it's difficult to know what the numbers mean or whether a slight difference is something to worry about.
+
+I built the **Blood Cell Count Analyzer** to explore how foundational programming concepts can help organize and interpret this data. The program runs directly in the terminal, guides the user through entering patient information and lab numbers, guards against invalid typing, compares values against standard academic reference ranges, and prints out an aligned, easy-to-read summary table.
+
+### What Parameters Does It Check?
+- **Red Blood Cells (RBC):** These carry oxygen from our lungs to the rest of our body. Normal counts differ between biological males and females, so the program takes gender into account.
+- **White Blood Cells (WBC):** The body's immune cells that help fight off bacterial and viral infections.
+- **Platelets:** Tiny cell fragments that help blood clot when you get injured.
 
 ---
 
-## 2. Project Overview
-The **Blood Cell Count Analyzer** is a console-based educational Python application designed to assist students and general users in understanding how fundamental physiological laboratory data can be analyzed computationally. 
+## Key Features
 
-The software collects basic complete blood count parameters—specifically **Red Blood Cell (RBC) count**, **White Blood Cell (WBC) count**, and **Platelet count**—validates the entered numbers, compares each measurement against customizable educational reference ranges (including gender-differentiated intervals for RBC), classifies each value as `LOW`, `WITHIN RANGE`, or `HIGH`, and compiles an easy-to-read tabular report with summary counts and educational notes.
-
----
-
-## 3. Problem Statement
-Routine health examinations frequently require interpreting laboratory blood test reports. For individuals without formal medical training or beginning health informatics students, raw laboratory values can appear confusing. Moreover, manual comparison against varying standard intervals is prone to human error.
-
-This project addresses the need for an accessible, beginner-friendly computational tool that demonstrates:
-1. How raw patient demographic and biomedical data can be captured and validated.
-2. How rule-based conditional algorithms can compare and categorize health data.
-3. How results can be organized and presented clearly without making speculative or dangerous medical diagnoses.
+- **Menu-Driven Terminal Interface:** Simple 6-option main menu that keeps running in a loop until you choose to exit.
+- **Defensive Input Handling:** The program never crashes if you accidentally enter letters, negative numbers, or blank lines. It catches errors with `try-except` blocks and gently asks you to re-type.
+- **Gender-Sensitive RBC Ranges:** Automatically chooses the appropriate physiological reference range for Red Blood Cells based on the patient's selected gender.
+- **Clean Tabular Reports:** Uses formatted f-strings with column width specifiers so the output looks like a neat, aligned lab report card.
+- **In-Memory Session History:** Keeps a running list of all records entered during your session using a Python list of dictionaries.
+- **Linear Search:** Look up previous tests by patient name (case-insensitive partial matching, so typing `"rahul"` finds `"Rahul Sharma"`) or by unique Sample ID.
+- **Zero Third-Party Packages:** Built entirely with the standard Python library—no `pip install` required. Anyone with Python 3.8+ can clone and run it immediately.
+- **Clear Ethical Disclaimers:** Every report reminds users that this tool is strictly educational and not a replacement for a medical doctor.
 
 ---
 
-## 4. Objectives
-- **Demonstrate Core Problem-Solving Concepts**: Apply first-year programming concepts such as control flow (`if/elif/else`), loops (`while`, `for`), modular functions, lists, and dictionaries.
-- **Implement Robust Input Validation**: Ensure the software handles invalid user input (e.g., negative numbers, letters in numerical fields, empty names) gracefully without crashing.
-- **Provide Centralized Reference Ranges**: Store academic reference values in an organized dictionary structure that can be easily modified in a single location.
-- **Classify and Quantify Blood Parameters**: Compare inputs with baseline reference boundaries and calculate summary statistics (total analyzed, within range, low, high).
-- **Maintain Session History**: Store multiple test records in-memory during a session and provide linear search functionality by patient name or sample ID.
-- **Enforce Medical Safety**: Prominently display educational disclaimers and avoid disease diagnostic claims.
+## Topics Covered from CSE1021
+This project demonstrates the core programming fundamentals covered in our first-year syllabus:
+- **Conditionals (`if-elif-else`)**: For categorizing blood counts into LOW, WITHIN RANGE, or HIGH based on reference ranges.
+- **Loops & Exceptions (`while`, `try-except`)**: To catch bad inputs like letters or empty entries so the terminal never crashes.
+- **Lists and Dictionaries**: For storing reference ranges and managing session test records in memory.
+- **Linear Search**: For finding saved patient records by name (case-insensitive substring match) or sample ID.
+- **Functions & Modules**: Splitting code across six Python files for clean organization.
 
 ---
 
-## 5. Target Users
-- **First-Year Engineering Students (CSE / Health Informatics)**: To study practical implementations of introductory Python programming topics.
-- **Academic Evaluators and Faculty**: To evaluate the student's mastery of algorithm design, pseudocode mapping, and modular coding.
-- **General Learners**: Anyone interested in understanding how blood count values compare against baseline physiological benchmarks.
+## Files in This Repository
+- `main.py` - Runs the interactive menu loop and coordinates user actions.
+- `validation.py` - Handles safe input prompts for demographics and blood counts.
+- `analyzer.py` - Compares blood counts with normal ranges and counts totals.
+- `reference_ranges.py` - Central dictionary containing normal reference limits for RBC, WBC, and Platelets.
+- `records.py` - Stores session records in memory and performs linear search.
+- `report.py` - Formats the tabular report card displayed in the terminal.
+- `run_tests.py` - Runs automated test cases covering normal, abnormal, and edge inputs.
+- `PROJECT_REPORT.md` / `Project_Report.pdf` - Complete course project report.
+- `statement.md` - Problem statement and project scope specification.
+- `VIVA_QUESTIONS_AND_ANSWERS.md` - Viva preparation questions and answers.
 
 ---
 
-## 6. Features
-- **Interactive Menu-Driven Navigation**: Easy-to-use menu with 6 operations running in an continuous loop.
-- **Patient Demographic Capture**: Secure collection of Name, Age, Gender, and customizable Sample ID.
-- **Strict Input Validation**: Reprompts user automatically on non-numeric, zero, negative, or blank inputs.
-- **Gender-Aware RBC Evaluation**: Automatically applies male, female, or general reference ranges for RBC count.
-- **Detailed Formatted Tabular Report**: Displays parameter name, entered value, reference range, and status in aligned columns.
-- **Summary Statistics**: Computes counts of parameters that are normal, low, and high.
-- **Session Records Management**: View all saved records or perform linear search by Patient Name or Sample ID.
-- **Educational Reference Range Inspection**: Dedicated menu option to inspect standard baseline values.
-- **Strict Educational Disclaimers**: Disclaimers included on startup, about screen, and within every printed report.
+## How to Run
 
----
+### Requirements
+- Python 3.8 or higher installed on your computer.
+- No third-party packages need to be installed.
 
-## 7. Functional Requirements
-1. **User Information Module (Module 1)**:
-   - Must capture Patient Name (non-empty string).
-   - Must capture Patient Age (positive integer, 1–125).
-   - Must capture Patient Gender from options (Male, Female, Other).
-   - Must assign or accept an optional Sample ID.
-2. **Blood Test Data Entry Module (Module 2)**:
-   - Must collect RBC (million cells/mcL), WBC (cells/mcL), and Platelet count (cells/mcL).
-   - Must validate that all laboratory numbers are positive floats/integers.
-3. **Blood Value Analysis Module (Module 3)**:
-   - Must fetch reference ranges from `reference_ranges.py`.
-   - Must classify values using standard conditionals (`< min`: LOW, `> max`: HIGH, otherwise: WITHIN RANGE).
-   - Must aggregate total parameters, count within range, count low, and count high.
-4. **Report Generation Module (Module 4)**:
-   - Must print a formatted summary table.
-   - Must output educational notes per parameter.
-   - Must include the non-diagnostic disclaimer.
-5. **Storage and Search Module (Module 5)**:
-   - Must append records to a list of dictionaries.
-   - Must allow viewing all session records in a summary table.
-   - Must support searching by patient name or sample ID.
-
----
-
-## 8. Non-Functional Requirements
-- **Usability**: Intuitive command-line prompts with examples (e.g., `e.g., 4.8` or `e.g., 7200`).
-- **Reliability & Crash Resilience**: Uncaught exceptions are prevented using `try-except` blocks and input verification loops.
-- **Maintainability**: Clear separation of concerns across 5 modular Python files; reference ranges are stored in one central dictionary.
-- **Performance**: Instantaneous computation and linear search execution suitable for local workstation use.
-- **Resource Efficiency**: Zero heavy dependencies; minimal RAM and CPU utilization.
-
----
-
-## 9. Technologies Used
-- **Language**: Python 3 (Tested on Python 3.8 to 3.14+)
-- **Libraries**: Python Standard Library only (`sys`, built-ins)
-- **Environment**: Cross-platform (Windows, macOS, Linux)
-- **Version Control**: Git / GitHub ready
-
----
-
-## 10. Python Concepts Used (CSE1021 Syllabus Mapping)
-| Concept | Application in Project |
-| :--- | :--- |
-| **Variables & Types** | Storing integers (`age`), floats (`rbc`, `wbc`), strings (`name`, `sample_id`), and booleans |
-| **Input / Output** | Formatted string output with `f-strings`, column alignment with width specifiers (`<12`, `<22`), `input()` |
-| **Control Flow (if-elif-else)** | Numerical range comparisons in `classify_value()` and menu branching |
-| **Loops (while, for)** | Continuous menu execution (`while True`), input validation retry loops, iteration through parameter lists |
-| **Functions & Modularization** | Dedicated single-responsibility functions with defined parameters and return values |
-| **Exception Handling (try-except)** | Catching `ValueError` during integer/float casting and preventing program crashes |
-| **Lists** | In-memory storage of session records (`session_records`) and parameter analysis results |
-| **Dictionaries** | Nested reference ranges (`BLOOD_RANGES`) and structured record objects (`record = {"patient_info": ...}`) |
-| **Algorithms** | Linear search (`search_by_name`, `search_by_sample_id`) and counting accumulator logic |
-
----
-
-## 11. Project Structure
-```text
-Blood_Cell_Count_Analyzer/
-│
-├── main.py               # Main program entrypoint and interactive menu loop
-├── analyzer.py           # Classification logic, analysis coordinator, and counters
-├── validation.py         # Robust input handling, validation loops, and data entry
-├── records.py            # In-memory record storage, viewing, and linear search
-├── reference_ranges.py   # Centralized reference ranges dictionary and disclaimer
-├── report.py             # Tabular report builder, summary display, and about screen
-├── run_tests.py          # Automated verification test suite for the 5 required test cases
-├── statement.md          # Formal problem statement and academic scope document
-├── requirements.txt      # Runtime dependencies specification (Standard library)
-└── README.md             # Complete project documentation and guide
-```
-
----
-
-## 12. How to Install
-1. **Verify Python Installation**:
-   Ensure Python 3.8 or higher is installed on your computer. Open a terminal or Command Prompt and run:
-   ```bash
-   python --version
-   ```
-2. **Clone or Download the Project**:
+### Quick Start
+1. Clone or download this repository:
    ```bash
    git clone https://github.com/ishasinghrajput25/blood-cell-count-analyzer.git
    cd blood-cell-count-analyzer
    ```
-3. **No External Packages Required**:
-   Since the application utilizes only Python built-in features, no `pip install` steps are required.
+
+2. Run the application:
+   ```bash
+   python main.py
+   ```
+
+3. Run the automated test suite:
+   ```bash
+   python run_tests.py
+   ```
 
 ---
 
-## 13. How to Run
-Run the main application by executing:
-```bash
-python main.py
-```
+## How to Use the Application
 
-To run the automated verification test suite:
-```bash
-python run_tests.py
-```
-
----
-
-## 14. How to Use
-1. Launch `python main.py`.
-2. Select **Option 1 (Enter New Blood Test)**:
-   - Enter patient name, age, and select gender (1 for Male, 2 for Female, 3 for Other).
-   - Enter optional Sample ID (or press Enter for automatic numbering).
-   - Enter RBC count in million cells/mcL (e.g., `4.8`).
-   - Enter WBC count in cells/mcL (e.g., `6500`).
-   - Enter Platelet count in cells/mcL (e.g., `220000`).
-3. View the generated report with column alignments, status classifications, summary counts, and notes.
-4. Select **Option 2 (View Previous Records)** to inspect all tests saved in the current session.
-5. Select **Option 3 (Search Record)** to search past entries by patient name or sample ID.
-6. Select **Option 4 (View Reference Ranges)** to view the educational baseline table.
-7. Select **Option 5 (About / Disclaimer)** to read course information and ethical guidelines.
-8. Select **Option 6 (Exit)** to terminate the program safely.
+1. Start the program by running `python main.py`.
+2. Choose **Option 1 (Enter New Blood Test)**:
+   - Enter the patient's full name and age.
+   - Select their gender (`1` for Male, `2` for Female, or `3` for Other).
+   - Enter a custom sample ID or simply press Enter to accept the automatic ID (like `SMP-1001`).
+   - Enter the three measured lab counts (RBC in million cells/mcL, WBC in cells/mcL, Platelets in cells/mcL).
+3. The program immediately displays a formatted table showing the entered values, baseline ranges, status flags (`LOW`, `WITHIN RANGE`, `HIGH`), summary counts, and educational notes.
+4. Select **Option 2 (View Previous Records)** to inspect all tests saved during your current session.
+5. Select **Option 3 (Search Record)** to search for an earlier patient by typing their name or sample ID.
+6. Select **Option 4 (View Reference Ranges)** to view the standard educational limits table anytime.
+7. Select **Option 5 (About / Disclaimer)** to read the project background and ethical guidelines.
+8. Select **Option 6 (Exit)** when you are finished.
 
 ---
 
-## 15. Sample Input
-```text
-Patient Full Name  : Priya Sharma
-Patient Age        : 20
-Gender Choice      : 2 (Female)
-Sample ID          : SMP-2001
-RBC Count          : 3.8
-WBC Count          : 12500
-Platelet Count     : 240000
-```
+## Sample Report Output
 
----
+Here is an example of what the generated report looks like in the terminal:
 
-## 16. Sample Output
 ```text
 ======================================================================
                   BLOOD CELL COUNT ANALYSIS REPORT
               Educational Health Informatics Laboratory
 ======================================================================
-Sample / Patient ID : SMP-2001
-Patient Name        : Priya Sharma
-Age                 : 20 years
-Gender              : Female
+Sample / Patient ID : SMP-1001
+Patient Name        : Rahul Sharma
+Age                 : 19 years
+Gender              : Male
 ----------------------------------------------------------------------
 Parameter    | Value        | Reference Range        | Status
 ----------------------------------------------------------------------
-RBC          | 3.8          | 4.1-5.1                | LOW
-WBC          | 12500        | 4500-11000             | HIGH
-Platelets    | 240000       | 150000-450000          | WITHIN RANGE
+RBC          | 4.8          | 4.5-5.9                | WITHIN RANGE
+WBC          | 6500         | 4500-11000             | WITHIN RANGE
+Platelets    | 220000       | 150000-450000          | WITHIN RANGE
 ----------------------------------------------------------------------
 SUMMARY
   Total parameters analyzed : 3
-  Within reference range    : 1
-  Below reference range     : 1
-  Above reference range     : 1
+  Within reference range    : 3
+  Below reference range     : 0
+  Above reference range     : 0
 ----------------------------------------------------------------------
 EDUCATIONAL OBSERVATIONS:
-  * RBC (Red Blood Cells): RBC value is below the selected reference range.
-  * WBC (White Blood Cells): WBC value is above the selected reference range.
+  * RBC (Red Blood Cells): RBC value is within normal educational limits.
+  * WBC (White Blood Cells): WBC value is within normal educational limits.
   * Platelets (Platelet Count): Platelet value is within normal educational limits.
 ----------------------------------------------------------------------
 IMPORTANT NOTICE:
@@ -229,49 +137,35 @@ condition. Please consult a licensed medical doctor for clinical care.
 
 ---
 
-## 17. Testing
-The application has been verified against 5 standard test cases using the automated verification suite `run_tests.py`:
+## Automated Verification Tests
 
-| Test Case | Inputs Tested | Expected Outcome | Actual Outcome | Status |
+I created `run_tests.py` to programmatically verify that all calculations, edge boundaries, and search functions behave as expected without requiring manual terminal typing:
+
+| Test Case | Scenario Tested | Input Values | Expected Output | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **Test Case 1: All Within Range** | RBC: 5.0 (M), WBC: 7000, Plt: 250000 | RBC, WBC, Plt = `WITHIN RANGE`<br>Within: 3, Low: 0, High: 0 | Within: 3, Low: 0, High: 0 | **PASSED** |
-| **Test Case 2: One Value Below Range** | RBC: 3.5 (M), WBC: 6500, Plt: 220000 | RBC = `LOW`, Others = `WITHIN RANGE`<br>Within: 2, Low: 1, High: 0 | Within: 2, Low: 1, High: 0 | **PASSED** |
-| **Test Case 3: One Value Above Range** | RBC: 4.8 (F), WBC: 13500, Plt: 300000 | WBC = `HIGH`, Others = `WITHIN RANGE`<br>Within: 2, Low: 0, High: 1 | Within: 2, Low: 0, High: 1 | **PASSED** |
-| **Test Case 4: Multiple Abnormal Values** | RBC: 3.8 (M), WBC: 14200, Plt: 110000 | RBC = `LOW`, WBC = `HIGH`, Plt = `LOW`<br>Within: 0, Low: 2, High: 1 | Within: 0, Low: 2, High: 1 | **PASSED** |
-| **Test Case 5: Input & Boundary Checks** | Boundary values (4.5, 5.9), negative & text input handling | Exact boundary values recognized as `WITHIN RANGE`; invalid inputs safely re-prompted | Error caught; search logic verified | **PASSED** |
+| **TC-01** | All values normal | RBC: 5.0 (M), WBC: 7000, Plt: 250000 | RBC, WBC, Plt all `WITHIN RANGE` | **PASSED (100%)** |
+| **TC-02** | Single value below range | RBC: 3.5 (M), WBC: 6500, Plt: 220000 | RBC flagged as `LOW` | **PASSED (100%)** |
+| **TC-03** | Single value above range | RBC: 4.8 (F), WBC: 13500, Plt: 300000 | WBC flagged as `HIGH` | **PASSED (100%)** |
+| **TC-04** | Multiple abnormal values | RBC: 3.8 (M), WBC: 14200, Plt: 110000 | RBC `LOW`, WBC `HIGH`, Plt `LOW` | **PASSED (100%)** |
+| **TC-05** | Inclusive boundaries & search | Exact cutoffs (4.50, 5.90, 4.49, 5.91) | Exact boundaries stay within range; linear search matches records | **PASSED (100%)** |
 
 ---
 
-## 18. Limitations
-1. **Volatile Memory**: Records are stored in RAM during the active session and will be cleared when the program terminates.
-2. **Fixed Parameter Scope**: Evaluates only three primary cellular parameters (RBC, WBC, Platelets) rather than a complete 20+ parameter hematology differential (such as MCV, MCH, Neutrophils, Lymphocytes).
-3. **Educational Standard Intervals**: Reference ranges are generalized pedagogical baselines and do not dynamically adjust for high altitudes, pregnancy, pediatrics, or specific clinical lab assay kits.
+## Limitations & Things I Want to Add Next
+
+### Current Limitations:
+- **Session-only memory:** Records live in RAM while the program runs and reset when you exit.
+- **Three core cell types:** Only looks at RBC, WBC, and Platelets rather than an extended complete blood panel with differential counts.
+
+### Future Enhancements:
+1. **Save to JSON or CSV:** Allow users to save their session records to a local file so data persists after closing the terminal.
+2. **Simple Desktop GUI:** Build a clean graphical interface with Python's built-in `tkinter` library.
+3. **Add More Blood Tests:** Expand to include Hemoglobin (Hb), Hematocrit (PCV), and 5-part differential white cell counts (Neutrophils, Lymphocytes, etc.).
+4. **Export Directly to PDF:** Add a one-click option to generate a printable PDF report card.
+5. **Patient Trend History:** Plot simple charts showing how a patient's counts change over successive visits.
 
 ---
 
-## 19. Future Enhancements
-- **Persistent Data Storage**: Add lightweight file persistence using JSON or CSV files without complex databases.
-- **Export to PDF/Text File**: Provide an option to save generated reports into downloadable `.txt` or `.pdf` files.
-- **Additional Parameters**: Extend the dictionary to include Hemoglobin (Hb), Hematocrit (PCV), and Mean Corpuscular Volume (MCV).
-- **Graphical User Interface (GUI)**: Implement a lightweight `tkinter` desktop GUI for visual data entry.
-- **Trend Analysis**: Graph changes in blood parameters over time for a patient across multiple visits.
+## Educational Disclaimer
 
----
-
-## 20. Disclaimer
-```text
-================================================================================
-                           EDUCATIONAL DISCLAIMER
-================================================================================
-This application is developed for educational purposes only as part of the
-course CSE1021 - Introduction to Problem Solving and Programming.
-
-It DOES NOT provide medical diagnosis, treatment recommendations, or clinical
-advice. Reference ranges vary across clinical laboratories, geographic regions,
-instruments, age groups, and sexes. 
-
-An abnormal parameter in this educational tool does NOT mean the user has a
-disease. Always consult a qualified medical professional or registered clinical
-laboratory for interpretation of actual diagnostic test results.
-================================================================================
-```
+This software was developed purely as an educational exercise for the first-year university course **CSE1021 – Introduction to Problem Solving and Programming**. It compares numerical inputs against standardized academic baselines and **does not provide medical diagnoses or healthcare advice**. Always consult a qualified medical professional for interpreting actual clinical diagnostic tests.

@@ -1,14 +1,7 @@
-# Blood Cell Count Analyzer - Main Application Entrypoint
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
-
-"""
-BLOOD CELL COUNT ANALYZER
-=========================
-An Educational Blood Test Data Analysis System
-Designed for first-year B.Tech CSE (Health Informatics) students.
-
-Authors / Student Project: CSE1021 Academic Submission
-"""
+# main.py
+# Main entrypoint and console menu controller
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 import sys
 from reference_ranges import display_reference_ranges, EDUCATIONAL_DISCLAIMER
@@ -19,7 +12,7 @@ from records import save_record, view_all_records, search_records_interactive
 
 def display_menu():
     """
-    Renders the primary console menu.
+    Prints the 6-option main menu to the terminal.
     """
     print("\n" + "=" * 50)
     print("           BLOOD CELL COUNT ANALYZER")
@@ -35,12 +28,9 @@ def display_menu():
 
 def handle_new_blood_test(session_records, sample_counter):
     """
-    Coordinates the end-to-end workflow for analyzing a single patient's blood test:
-    1. Collects patient demographic information (Module 1)
-    2. Collects measured laboratory values (Module 2)
-    3. Performs rule-based range comparison and counting (Module 3)
-    4. Formats and prints the analysis report (Module 4)
-    5. Saves the record to session memory (Module 5)
+    Handles the full workflow for adding a new test:
+    takes user demographics and blood values, analyzes them, prints the report,
+    and appends the record into session history.
     """
     # Step 1: Collect patient details
     patient_info = get_user_information(sample_counter)

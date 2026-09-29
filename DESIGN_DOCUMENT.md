@@ -2,13 +2,14 @@
 
 **Project Title:** Blood Cell Count Analyzer  
 **Course Code:** CSE1021 – Introduction to Problem Solving and Programming  
-**Branch:** B.Tech CSE (Health Informatics)
+**Branch:** B.Tech CSE (Health Informatics)  
+**Author:** Isha Singh Rajput
 
 ---
 
 ## 1. System Architecture
 
-The software follows a modular, layered console architecture designed for clear separation of concerns:
+I designed the software using a modular layout where each file has a specific responsibility. This keeps the code organized, prevents circular dependencies, and makes testing each module independently very straightforward:
 
 ```
 +-----------------------------------------------------------------------+

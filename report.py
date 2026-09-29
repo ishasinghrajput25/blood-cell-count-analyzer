@@ -1,20 +1,18 @@
-# Report formatting and presentation module
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# report.py
+# Report formatting and terminal presentation
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-REPORT MODULE
-=============
-This module formats and presents the blood cell count analysis results.
-It builds a clean, readable text report with aligned columns,
-displays a quantitative summary, and appends mandatory educational disclaimers.
+This file formats the final test analysis into an aligned terminal report card,
+prints summary counts, and appends the course educational disclaimer.
 """
 
 from reference_ranges import EDUCATIONAL_DISCLAIMER
 
 def format_record_report(record):
     """
-    Constructs a comprehensive, nicely-formatted string representation
-    of a complete blood test record.
+    Builds the formatted string representation of a patient's blood test report.
     """
     patient = record["patient_info"]
     analysis = record["analysis"]

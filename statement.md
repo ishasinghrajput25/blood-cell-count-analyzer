@@ -4,62 +4,60 @@
 **Blood Cell Count Analyzer: An Educational Blood Test Data Analysis System**
 
 **Course**: CSE1021 – Introduction to Problem Solving and Programming  
-**Branch & Specialization**: First-Year B.Tech Computer Science and Engineering (Health Informatics)
+**Branch & Specialization**: First-Year B.Tech Computer Science and Engineering (Health Informatics)  
+**Student**: Isha Singh Rajput  
 
 ---
 
 ## 1. Problem Statement
-In clinical medicine and laboratory health informatics, a Complete Blood Count (CBC) is one of the most frequently ordered diagnostic evaluations. A standard CBC assesses multiple vital cellular components of blood, including Red Blood Cells (RBC), White Blood Cells (WBC), and Platelets.
+Whenever a patient visits a clinic or hospital, one of the first investigations ordered is a Complete Blood Count (CBC). This test looks at the three core cellular elements in blood: Red Blood Cells (RBC), White Blood Cells (WBC), and Platelets.
 
-Manual inspection and interpretation of raw numerical laboratory reports can be time-consuming, prone to human transcription or comparison errors, and difficult for non-specialists to quickly assess. Furthermore, introductory students in health informatics require concrete programming examples that illustrate how computational algorithms can ingest, validate, compare, and categorize physiological data against reference standards.
+However, interpreting a lab sheet is often confusing for everyday people. The numbers span completely different scales—RBC is written in small decimals like 4.8 million/mcL, WBC is in thousands, and Platelets are in hundreds of thousands. On top of that, standard reference ranges aren't fixed; they vary depending on biological factors like sex. When people try checking these numbers manually against reference charts, it is easy to misread columns or misplace decimal points.
 
-The problem is to develop a beginner-friendly, modular, console-based Python application that automates the verification and comparison of standard blood cell parameters against academic reference ranges, flags out-of-range deviations, counts summary statistics, and outputs a formatted report without introducing medically speculative diagnostic claims.
+As a first-year Health Informatics student, I wanted to address this by building a clean, console-based Python tool. The idea is to take a patient's numbers, check them carefully so typos don't crash the script, match them against standard medical reference ranges, flag anything high or low, and display an organized summary report. Most importantly, the tool stays strictly educational and never attempts to give real medical diagnoses.
 
 ---
 
 ## 2. Project Scope
 
-### In-Scope:
-1. **Interactive Data Capture**:
-   - Patient demographic capture: Full Name, Age (positive integer), Gender (Male/Female/Other), and unique Sample/Patient ID.
-   - Laboratory measurements capture: RBC (million cells/mcL), WBC (cells/mcL), and Platelet count (cells/mcL).
-2. **Robust Input Validation**:
-   - Preventing empty, negative, or non-numerical values.
-   - Graceful re-prompting using `while` loops and `try-except ValueError` blocks.
+### What the Project Covers (In-Scope):
+1. **Patient Demographic & Lab Entry**:
+   - Asks for patient name (ensuring it's not left blank), age (checked between 1 and 125), and biological sex (needed to pick the right RBC reference range).
+   - Generates an auto-incrementing ID like `SMP-1001` or lets the user provide their own sample code.
+   - Takes input for RBC, WBC, and Platelet levels one by one.
+2. **Crash-Proof Input Validation**:
+   - Catches letters and symbols when numbers are expected using `try-except ValueError`.
+   - Uses `while` loops to keep prompting until the user enters positive, non-zero values.
 3. **Reference Range Engine**:
-   - Centralized dictionary lookup for reference ranges.
-   - Gender-specific range matching for Red Blood Cell count.
-4. **Algorithmic Classification & Counting**:
-   - Conditional classification (`if-elif-else`) into `LOW`, `WITHIN RANGE`, or `HIGH`.
-   - Counting total parameters, within-range parameters, low parameters, and high parameters.
-5. **Report & Observation Formatting**:
-   - Generating an aligned tabular report showing parameters, observed values, reference intervals, and status.
-   - Appending clear educational observations and non-diagnostic disclaimers.
-6. **Session-Level In-Memory Record Management**:
-   - Storing completed tests in Python lists of dictionaries.
-   - Searching historical session records by patient name or sample ID using linear search.
+   - Stores standard reference boundaries in a central dictionary in `reference_ranges.py`.
+   - Dynamically selects gender-specific boundaries for RBC (Male: 4.5–5.9, Female: 4.1–5.1 million/mcL).
+4. **Classification & Summary Counting**:
+   - Compares each lab value using `if-elif-else` logic to categorize it as `LOW`, `WITHIN RANGE`, or `HIGH`.
+   - Keeps track of counts for normal, low, and high parameters using accumulator variables.
+5. **Formatted Console Report & Educational Notes**:
+   - Prints an aligned summary table with clear column widths.
+   - Attaches educational notes explaining what each flag means, followed by a clear non-diagnostic disclaimer.
+6. **In-Memory Session History & Linear Search**:
+   - Stores each completed test in a Python list of dictionaries during the session.
+   - Implements linear search to let users find past records by patient name (case-insensitive substring match) or sample ID.
 
-### Out-of-Scope (Design Constraints):
-- **No Clinical Diagnosis or Disease Labeling**: The software does not diagnose conditions such as anemia, leukemia, or thrombocytopenia, adhering strictly to ethical and educational boundaries.
-- **No Complex External Frameworks**: No heavy third-party packages, machine learning models, or web frameworks (e.g., Django, Flask, Pandas, TensorFlow) are used, keeping the codebase transparent and aligned with the first-year syllabus.
-- **No Persistent External SQL/NoSQL Database**: Storage is kept in memory during runtime to focus on core algorithmic data structures (lists and dictionaries).
-
----
-
-## 3. Target Users
-1. **First-Year Health Informatics & CSE Students**:
-   - Learners studying how programming constructs (loops, conditions, functions, and dictionaries) solve health-data problems.
-2. **Academic Evaluators and Faculty**:
-   - Instructors evaluating problem-solving methodologies, algorithm design, pseudocode-to-code mapping, and code clarity during laboratory vivas.
-3. **General Users & Learners**:
-   - Individuals seeking to understand how laboratory reference intervals relate to measured physiological metrics.
+### What is Kept Out-of-Scope (Deliberate Design Decisions):
+- **No Clinical Diagnosis**: The tool deliberately avoids diagnosing specific illnesses (such as anemia, infections, or thrombocytopenia). Diagnosing requires clinical history, differential counts, and physical exams that software cannot replace.
+- **No External Libraries**: I avoided third-party packages like pandas, tabulate, or web frameworks. Everything is built with standard Python 3 to ensure any teacher or classmate can run it directly without running `pip install`.
+- **No Heavy Database Engines**: Records are kept in memory using lists of dictionaries. This keeps the focus squarely on our first-year syllabus concepts—loops, data structures, and basic searching algorithms.
 
 ---
 
-## 4. High-Level Features
-- **Menu-Driven Interface**: Six-option interactive console menu running in a resilient execution loop.
-- **Demographic & Value Validation**: Prevents invalid types, zero/negative inputs, and missing names.
-- **Gender-Sensitive RBC Evaluation**: Accurately selects male or female reference baselines.
-- **Linear Search Module**: Rapid session lookup by patient name or unique sample ID.
-- **Educational Baseline Display**: Standalone option to inspect active reference ranges.
-- **Mandatory Medical Disclaimer**: Prominently presented on reports and information screens.
+## 3. Who This Tool Is For
+- **Health Informatics & CSE Students**: Classmates who want to see how basic Python constructs—like loops, conditionals, and dictionaries—can be applied to solve biomedical data problems.
+- **Faculty & Lab Evaluators**: Teachers assessing my programming fundamentals, problem breakdown, defensive coding habits, and code readability during the CSE1021 lab viva.
+- **Curious Users**: Anyone wanting a simple explanation of how their blood test numbers compare to typical educational reference boundaries.
+
+---
+
+## 4. Key Highlights of the Application
+- **Easy-to-use 6-option Menu**: Keeps the program running in an interactive loop until the user chooses to exit.
+- **Dependable Input Handling**: Won't crash on invalid keystrokes, spaces, or negative numbers.
+- **Gender-Aware RBC Ranges**: Correctly distinguishes between male and female biological normal limits.
+- **Simple Linear Search**: Finds previous tests in seconds using partial name matches.
+- **Always Visible Disclaimers**: Reminds users right on screen that this is a student project, not medical advice.

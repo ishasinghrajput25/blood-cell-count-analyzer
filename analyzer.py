@@ -1,28 +1,19 @@
-# Blood cell count analysis and classification module
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# analyzer.py
+# Classification and analysis logic for blood cell parameters
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-ANALYZER MODULE
-===============
-This module implements the core computational logic for comparing blood cell counts
-against educational reference ranges.
-
-It demonstrates:
-- Conditional structures (if, elif, else)
-- Comparison operators (<, >, <=, >=)
-- Counting algorithms
-- Modular function design
+This file handles the comparison logic. It checks blood count values against
+reference ranges (taking into account gender for RBC) and classifies each value
+as LOW, WITHIN RANGE, or HIGH, then tallies up the summary counts.
 """
 
 from reference_ranges import get_rbc_range, get_wbc_range, get_platelet_range, BLOOD_RANGES
 
 def classify_value(value, min_range, max_range):
     """
-    Compares a numerical value against lower and upper limits.
-    Returns:
-    - 'LOW' if value < min_range
-    - 'HIGH' if value > max_range
-    - 'WITHIN RANGE' if min_range <= value <= max_range
+    Compares a value against min and max thresholds and returns status.
     """
     if value < min_range:
         return "LOW"
@@ -117,12 +108,7 @@ def analyze_platelets(platelet_value):
 
 def analyze_blood_values(blood_values, gender):
     """
-    MODULE 3: Complete analysis coordinator.
-    Analyzes RBC, WBC, and Platelets, and computes summary counts.
-    
-    Demonstrates:
-    - Counting algorithm
-    - Dictionary aggregation
+    Analyzes RBC, WBC, and Platelets, and computes total counts for normal, low, and high.
     """
     rbc_result = analyze_rbc(blood_values["RBC"], gender)
     wbc_result = analyze_wbc(blood_values["WBC"])
@@ -130,13 +116,13 @@ def analyze_blood_values(blood_values, gender):
     
     results_list = [rbc_result, wbc_result, platelet_result]
     
-    # Initialize counters (Fundamental algorithm: Counting)
+    # Accumulator counters for our summary
     total_tested = len(results_list)
     within_range_count = 0
     low_count = 0
     high_count = 0
     
-    # Iterate and count each category
+    # Iterate through parameters and count status categories
     for item in results_list:
         if item["status"] == "WITHIN RANGE":
             within_range_count += 1

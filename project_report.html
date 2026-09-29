@@ -194,24 +194,29 @@
   <!-- 2. INTRODUCTION -->
   <h2>2. Introduction</h2>
   <p>
-    A Complete Blood Count (CBC) is one of the most critical diagnostic evaluations performed in healthcare. It assesses the cellular components of circulating blood, focusing principally on:
+    For my first-year project in CSE1021, and given my specialization in Health Informatics, I wanted to build an application centered on actual health data instead of solving another generic math exercise. In routine clinical care, a Complete Blood Count (CBC) is almost always the starting point whenever a doctor evaluates a patient. It measures the three main cell types circulating in our bloodstream:
   </p>
   <ul>
-    <li><strong>Red Blood Cells (RBC):</strong> Erythrocytes that transport oxygen from the lungs to bodily tissues and return carbon dioxide.</li>
-    <li><strong>White Blood Cells (WBC):</strong> Leukocytes that drive immunological defense against infections and inflammation.</li>
-    <li><strong>Platelets (Thrombocytes):</strong> Cellular fragments crucial for hemostasis, vascular repair, and blood clotting.</li>
+    <li><strong>Red Blood Cells (RBC):</strong> These contain hemoglobin and carry oxygen from our lungs to every organ and muscle. When someone's RBC count drops too low, they often experience weakness and fatigue.</li>
+    <li><strong>White Blood Cells (WBC):</strong> These form our immune system's primary defense squad, actively fighting off bacterial infections, viruses, and inflammatory conditions.</li>
+    <li><strong>Platelets:</strong> These are tiny cell fragments responsible for forming blood clots. Without enough platelets, even minor cuts or scrapes can lead to continuous bleeding.</li>
   </ul>
   <p>
-    In Health Informatics, computational systems such as Laboratory Information Systems (LIS) and Clinical Decision Support Systems (CDSS) structure, validate, and compare physiological observations against standardized demographic reference intervals. The <strong>Blood Cell Count Analyzer</strong> provides an educational, console-based simulation of this workflow, built explicitly with foundational Python constructs: conditional branches, loops, functions, lists, and dictionaries.
+    Whenever friends or family receive a printed laboratory report, they are often confronted with an overwhelming grid of numbers, technical unit notations, and reference ranges. To a non-specialist, it is hard to tell whether a slight deviation is significant or just ordinary biological variation. To address this, I built the <strong>Blood Cell Count Analyzer</strong>—a modular, console-based Python tool that takes patient demographics and cell counts, validates every input to protect against typing mistakes, compares values against recognized educational reference ranges, and prints out a clear, structured summary table with non-diagnostic disclaimers.
   </p>
 
   <!-- 3. PROBLEM STATEMENT -->
   <h2>3. Problem Statement</h2>
   <p>
-    Manual inspection of laboratory hematology reports by non-clinical learners is prone to comparison mistakes, misinterpretation of gender-differentiated normal intervals, and unnecessary anxiety due to premature self-diagnosis.
+    When people try to review blood test reports manually or when beginners learn health informatics, a few recurring issues arise:
   </p>
+  <ul>
+    <li><strong>Accidental comparison mistakes:</strong> Looking back and forth across printed rows of data to verify values against standard boundaries is repetitive and prone to error. This is especially true because normal limits change with patient demographics—for example, biological men typically have higher baseline RBC reference ranges than biological women.</li>
+    <li><strong>Confusing scales and orders of magnitude:</strong> Blood tests mix drastically different scales. RBC is typically written as a decimal like 4.8 (representing 4.8 million cells/mcL), whereas WBC is reported in thousands (like 7,500 cells/mcL) and Platelets in hundreds of thousands (like 250,000 cells/mcL). Without clear input guidance, beginners frequently misread or mistype these figures.</li>
+    <li><strong>Unnecessary worry from quick self-diagnosis:</strong> Seeing an out-of-range flag often leads individuals to jump to worst-case medical conclusions online, when in reality blood counts fluctuate naturally from hydration, stress, or mild exertion.</li>
+  </ul>
   <div class="callout">
-    <strong>Technical Challenge:</strong> To design and implement a beginner-friendly, modular Python software application using core concepts from CSE1021 that automates laboratory data input, validates input formats, evaluates values against gender-aware reference intervals, aggregates statistical counts, and generates an aligned report accompanied by strict non-diagnostic educational disclaimers.
+    <strong>My Project Objective:</strong> My goal was to design and build an intuitive, menu-driven Python application applying core CSE1021 concepts—variables, branching logic (<code>if-elif-else</code>), loops, functions, lists, dictionaries, exception handling (<code>try-except</code>), and linear search. The software needed to reliably capture user inputs without crashing, classify counts against gender-aware baselines, and display an educational report that clearly states it is an informative tool rather than a clinical medical diagnosis.
   </div>
 
   <!-- 4. FUNCTIONAL REQUIREMENTS -->
@@ -223,35 +228,35 @@
     </tr>
     <tr>
       <td><strong>Module 1: Patient Information</strong></td>
-      <td>Captures and validates Patient Name (non-empty), Age (positive integer 1–125), Gender (Male/Female/Other), and assigns unique Sample ID.</td>
+      <td>Collects and checks Patient Name (non-empty), Age (positive integer 1–125), Gender (Male/Female/Other), and generates an auto-incrementing Sample ID (e.g. <code>SMP-1001</code>) with optional custom entry.</td>
     </tr>
     <tr>
       <td><strong>Module 2: Blood Data Entry</strong></td>
-      <td>Prompts for RBC, WBC, and Platelet counts with specified medical units. Robustly catches and reprompts on non-numeric, negative, or zero inputs.</td>
+      <td>Prompts sequentially for RBC, WBC, and Platelet counts with specified clinical units. Catches text inputs, negative numbers, and zeroes, reprompting gracefully without crashing.</td>
     </tr>
     <tr>
       <td><strong>Module 3: Blood Analysis</strong></td>
-      <td>Matches gender-specific ranges for RBC and adult baselines for WBC/Platelets. Categorizes values as <code>LOW</code>, <code>WITHIN RANGE</code>, or <code>HIGH</code>. Calculates summary counts.</td>
+      <td>Selects gender-specific reference limits for RBC and adult limits for WBC/Platelets. Uses <code>if-elif-else</code> logic to categorize values into <code>LOW</code>, <code>WITHIN RANGE</code>, or <code>HIGH</code>, and computes summary counts.</td>
     </tr>
     <tr>
       <td><strong>Module 4: Report Generation</strong></td>
-      <td>Builds an aligned tabular report showing parameters, observed values, reference intervals, status, summary statistics, and disclaimers.</td>
+      <td>Builds an aligned tabular report showing parameters, observed values, reference intervals, status flags, summary tallies, educational notes, and safety disclaimers.</td>
     </tr>
     <tr>
       <td><strong>Module 5: Session Storage & Search</strong></td>
-      <td>Stores records in an in-memory list of dictionaries. Provides summary listing and linear search by patient name or sample ID.</td>
+      <td>Stores patient records in an in-memory list of dictionaries during the session. Provides record history viewing and case-insensitive linear search by name or sample ID.</td>
     </tr>
   </table>
 
   <!-- 5. NON-FUNCTIONAL REQUIREMENTS -->
   <h2>5. Non-Functional Requirements</h2>
   <ul>
-    <li><strong>Usability:</strong> Intuitive terminal menu with explicit unit hints (e.g., <code>million cells/mcL, e.g., 4.8</code>) and continuous loop navigation.</li>
-    <li><strong>Reliability & Crash Resilience:</strong> Uncaught runtime exceptions are prevented using <code>try-except ValueError</code> blocks embedded in <code>while True</code> validation loops.</li>
-    <li><strong>Maintainability:</strong> Clean separation of concerns across 6 Python files. Reference ranges are isolated within a single dictionary (<code>reference_ranges.py</code>).</li>
-    <li><strong>Performance:</strong> Instantaneous computation and linear search execution (&lt; 10 ms).</li>
-    <li><strong>Resource Efficiency:</strong> Uses standard library only (zero external pip packages); RAM usage is under 25 MB.</li>
-    <li><strong>Ethical Transparency:</strong> Prominent educational disclaimers prevent medical misinterpretation.</li>
+    <li><strong>User Friendliness:</strong> The console uses an intuitive 6-option numbered menu with clear unit hints (e.g., <code>million cells/mcL, e.g., 4.8</code>) so the user never has to guess what format to use.</li>
+    <li><strong>Crash Prevention (Defensive Coding):</strong> Prevents runtime crashes by wrapping all numeric inputs in <code>try-except ValueError</code> blocks nested inside infinite <code>while True</code> loops.</li>
+    <li><strong>Clean File Separation:</strong> Broken into 6 single-purpose files. Changing normal reference values in <code>reference_ranges.py</code> never risks breaking math logic in <code>analyzer.py</code>.</li>
+    <li><strong>Fast Performance:</strong> Runs in memory on native Python structures, making searches and reports instantaneous with zero lag.</li>
+    <li><strong>Zero External Dependencies:</strong> Written with standard Python 3.8+ libraries only, requiring zero <code>pip install</code> steps for faculty evaluation.</li>
+    <li><strong>Ethical Health Messaging:</strong> Prominent disclaimers remind users that the output is an educational tool rather than clinical medical advice.</li>
   </ul>
 
   <div class="page-break"></div>
@@ -361,12 +366,15 @@ PATIENT (sample_id [PK], name, age, gender)
 
   <!-- 8. DESIGN DECISIONS & RATIONALE -->
   <h2>8. Design Decisions & Rationale</h2>
+  <p>
+    While developing this application, I made several deliberate architectural and algorithmic choices to balance simplicity with practical programming practices:
+  </p>
   <ul>
-    <li><strong>Modular Architecture:</strong> Decoupling validation, analysis, reference data, storage, and reporting allows each file to adhere to the Single Responsibility Principle and simplifies unit testing.</li>
-    <li><strong>Standard Library Exclusivity:</strong> Eliminates pip version mismatches across student environments, ensuring the project runs seamlessly on any standard Python 3.8+ interpreter.</li>
-    <li><strong>In-Memory Python Lists and Dictionaries:</strong> Highlights core first-year syllabus concepts (dictionary lookups, list iteration, linear search) without the overhead of external SQL engines.</li>
-    <li><strong>Deterministic Rules vs. ML:</strong> Clinical reference ranges are legally regulated physiological thresholds, making rule-based conditional branches (<code>if-elif-else</code>) transparent and accurate.</li>
-    <li><strong>Strict Non-Diagnostic Educational Stance:</strong> Abnormal parameters are reported as mathematical deviations, reinforcing safe clinical informatics ethics.</li>
+    <li><strong>Dividing the Project into 6 Specialized Files:</strong> Instead of writing a single monolithic script, I separated the codebase into dedicated modules: <code>main.py</code> (menu control), <code>validation.py</code> (data verification), <code>analyzer.py</code> (classification algorithms), <code>reference_ranges.py</code> (centralized reference tables), <code>records.py</code> (session storage), and <code>report.py</code> (formatted display). This made debugging straightforward and let me test individual functions independently.</li>
+    <li><strong>Relying Exclusively on the Python Standard Library:</strong> I intentionally avoided external packages like pandas or tabulate. In academic environments, missing pip packages frequently cause setup failures. Sticking to built-in Python ensures that any evaluator can run the software immediately on their machine.</li>
+    <li><strong>In-Memory Lists of Dictionaries:</strong> For session history, I used a Python list of patient record dictionaries. This directly applies core first-year concepts—such as dictionary key lookups and linear search algorithms—without introducing unnecessary database complexity.</li>
+    <li><strong>Deterministic Conditional Logic Over Machine Learning:</strong> Clinical reference ranges are established, standardized physiological benchmarks rather than probabilistic guesses. Simple conditional structures (<code>if-elif-else</code>) are transparent, explainable, and 100% predictable.</li>
+    <li><strong>Strict Educational Disclaimers:</strong> Since health software must follow strong ethical standards, I ensured every generated report and the main menu clearly state that the program is an educational tool and does not provide clinical diagnoses.</li>
   </ul>
 
   <!-- 9. IMPLEMENTATION DETAILS -->
@@ -405,7 +413,7 @@ PATIENT (sample_id [PK], name, age, gender)
     <tr>
       <td><code>main.py</code></td>
       <td><code>main</code>, <code>display_menu</code>, <code>handle_new_blood_test</code></td>
-      <td>Event-loop management, modular function orchestration</td>
+      <td>Menu loop control, function dispatching</td>
     </tr>
   </table>
 
@@ -487,28 +495,39 @@ EDUCATIONAL OBSERVATIONS:
     </tr>
   </table>
 
-  <!-- 12. CHALLENGES FACED -->
-  <h2>12. Challenges Faced</h2>
+  <!-- 12. CHALLENGES FACED & HOW I RESOLVED THEM -->
+  <h2>12. Challenges Faced & How I Resolved Them</h2>
+  <p>
+    During the implementation and testing of the program, I encountered several practical challenges:
+  </p>
   <ul>
-    <li><strong>Clinical Unit Discrepancies:</strong> RBC is measured in million cells/mcL, whereas WBC and platelets are in whole counts/mcL. Solved by embedding explicit format hints in the CLI prompts.</li>
-    <li><strong>Crash Prevention:</strong> Non-numeric user inputs were handled using <code>try-except ValueError</code> inside <code>while True</code> loops.</li>
-    <li><strong>Gender Sensitivity:</strong> Solved by using gender-keyed nested dictionaries for RBC thresholds.</li>
-    <li><strong>Medical Ethics:</strong> Guarded against speculative diagnoses by framing findings as mathematical reference comparisons.</li>
+    <li><strong>Handling Input Crashes from Invalid Data:</strong> Early in testing, if a user entered letters (like typing "five" instead of 5.0) or submitted an empty line, the program crashed with an unhandled <code>ValueError</code>. To solve this, I wrapped all numerical input operations inside <code>try-except ValueError</code> blocks within infinite <code>while True</code> loops. The program now intercepts the error, prints a helpful explanation, and re-prompts the user until valid data is entered.</li>
+    <li><strong>Handling Scale Differences Across Blood Parameters:</strong> RBC counts are small decimals (e.g., 4.5 million cells/mcL), while WBC and Platelets are large whole numbers (e.g., 7,500 and 250,000 cells/mcL). To avoid user confusion, I designed <code>validate_positive_float()</code> to handle both decimals and integers, and included realistic example values directly inside every input prompt.</li>
+    <li><strong>Gender Sensitivity for RBC Ranges:</strong> Normal RBC counts differ between males (4.5–5.9) and females (4.1–5.1). I solved this by capturing gender in Module 1 and using a nested dictionary lookup in <code>reference_ranges.py</code> so the analysis engine automatically picks the correct physiological baseline.</li>
+    <li><strong>Exact Boundary Condition Handling:</strong> If an RBC count is exactly 4.5, should it be flagged as low or normal? Initially, using strictly <code>&lt;</code> and <code>&gt;</code> left boundary points vulnerable to subtle errors. I structured the boundary condition as <code>min_range &lt;= value &lt;= max_range</code> to ensure inclusive boundary values are accurately categorized as <code>WITHIN RANGE</code>.</li>
   </ul>
 
   <!-- 13. LEARNINGS & KEY TAKEAWAYS -->
   <h2>13. Learnings & Key Takeaways</h2>
   <p>
-    Through this project, we mastered algorithmic problem decomposition, defensive programming with exception handling, dictionary data structures, linear search mechanics, and the role of Health Informatics in standardizing laboratory data processing.
+    Writing this program gave me a much stronger appreciation for the practical concepts we covered in CSE1021:
   </p>
+  <ul>
+    <li><strong>Defensive programming isn't just theory:</strong> Early on, bad user inputs crashed my terminal immediately. Putting <code>try-except</code> inside <code>while</code> loops made the app feel solid.</li>
+    <li><strong>Single-responsibility functions save debugging time:</strong> Breaking the project into separate files (<code>validation.py</code>, <code>analyzer.py</code>, etc.) meant that whenever an issue popped up with table spacing or range lookups, I knew exactly which file to look at.</li>
+    <li><strong>Lists of dictionaries are great for modeling real records:</strong> Storing each test as a dictionary inside an in-memory list gave me hands-on practice with key access, appending items, and iterating through rows.</li>
+    <li><strong>Linear search in action:</strong> Implementing search by iterating through session records and checking <code>.lower()</code> substrings gave me a concrete use case for algorithms discussed in class.</li>
+    <li><strong>Ethics in health computing:</strong> When building medical software—even an introductory project—proper disclaimers and clear explanations are just as essential as clean syntax.</li>
+  </ul>
 
   <!-- 14. FUTURE ENHANCEMENTS -->
   <h2>14. Future Enhancements</h2>
   <ol>
-    <li>Persistent data storage via JSON or CSV files.</li>
-    <li>Desktop Graphical User Interface using Python's built-in <code>tkinter</code>.</li>
-    <li>Expansion to include Hemoglobin, Hematocrit, and 5-part Differential Leukocyte Counts.</li>
-    <li>Automated PDF export for printable patient laboratory report cards.</li>
+    <li><strong>Saving Records to Disk:</strong> Storing records in a local JSON or CSV file so patient data doesn't disappear when the user exits the terminal.</li>
+    <li><strong>A Simple Graphical Interface (GUI):</strong> Using Python's built-in <code>tkinter</code> library to build a beginner-friendly windowed application for people who prefer clicking buttons over typing in a console.</li>
+    <li><strong>Adding More CBC Parameters:</strong> Expanding beyond RBC, WBC, and Platelets to cover Hemoglobin (Hb), Hematocrit (PCV), and white blood cell differential counts.</li>
+    <li><strong>Exporting Clean PDFs:</strong> Generating an automatic printable lab summary sheet directly from the terminal.</li>
+    <li><strong>Patient Trend Tracking:</strong> Plotting a simple graph across multiple visits to show whether a patient's cell counts are recovering over time.</li>
   </ol>
 
   <!-- 15. REFERENCES -->

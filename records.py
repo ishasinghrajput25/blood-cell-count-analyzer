@@ -1,18 +1,11 @@
-# In-memory record management and search module
-# Subject: CSE1021 - Introduction to Problem Solving and Programming
+# records.py
+# In-memory record management and search functions
+# Course: CSE1021 - Introduction to Problem Solving and Programming
+# Author: Isha Singh Rajput
 
 """
-RECORDS MODULE
-==============
-This module manages test records during the active program session.
-It uses elementary Python data structures:
-- A Python list (`records_list`) to store all session records.
-- Dictionaries to represent individual test records.
-
-Demonstrates:
-- List operations (append, iteration, indexing)
-- Linear search algorithms (searching by Name and by Sample ID)
-- Data aggregation and presentation
+This file manages saving completed blood tests in a list of dictionaries
+during the session and provides linear search by patient name or sample ID.
 """
 
 from report import display_report
